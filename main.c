@@ -201,7 +201,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lpara
 					bldngGrdStr = false;
 				}
 
-				MessageBoxA(NULL, gridStr, "What you typed", MB_OK);
+				//MessageBoxA(NULL, gridStr, "What you typed", MB_OK);
 
 				gridSize = atoi(gridStr);
 
@@ -209,7 +209,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lpara
 				testStr[0] = (char)gridSize;
 				testStr[1] = 0;
 
-				MessageBoxA(NULL, testStr, "Int test", MB_OK);
+				//MessageBoxA(NULL, testStr, "Int test", MB_OK);
 
 				printf("Grid size: %i", gridSize);
 				fflush(stdout);
@@ -229,9 +229,10 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lpara
 
 				showGrid = true;
 				InvalidateRect(hwnd, NULL, true);
+				MessageBoxA(NULL, "Click two points to draw a line between them, and press c to select a new color to draw lines with.", "Instructions", MB_OK|MB_ICONINFORMATION);
 				return 0;
 			} else if (wparam >= 48 && wparam <= 57 && bldngGrdStr) {
-				MessageBox(NULL, "You typed something!", "I knew it", MB_OK);
+				//MessageBox(NULL, "You typed something!", "I knew it", MB_OK);
 				char *tempPtr = realloc(gridStr, inLen+1);
 				gridStr = tempPtr;
 				gridStr[inLen] =(char)wparam;
@@ -370,6 +371,9 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrev, LPSTR lpCmdLine, int nCmdSh
 	if (!hwnd) return 0;
 
 	ShowWindow(hwnd, nCmdShow);
+
+	MessageBoxA(NULL, "Type the size of graph you want, then press enter to show graph.", "Instructions", MB_OK|MB_ICONINFORMATION);
+
 	UpdateWindow(hwnd);
 
 	while(GetMessage(&msg, NULL, 0, 0))
